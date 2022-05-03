@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+body {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+main {
+  height: 70vh;
+}
+
+.counter {
+  font-family: 'Special Elite', cursive;
+  font-size: 200px;
+  position: relative;
+  transform: translate(0, -50%);
+  text-align: center;
+  top: 50%;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+.start-button, .stop-button, .time-input {
+  margin: 100px;
+  padding: 10px 30px;
+}
