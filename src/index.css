@@ -14,25 +14,25 @@ code {
     monospace;
 }
 
-main {
-  height: 70vh;
-}
-
-.counter {
-  font-family: 'Special Elite', cursive;
-  font-size: 200px;
-  position: relative;
-  transform: translate(0, -50%);
+.time {
+  font-family: 'Special Elite';
+  font-size: 8em;
+  margin-top: 50vh;
   text-align: center;
-  top: 50%;
 }
 
-.buttons-container {
+.time-components {
+  align-items: center;
   display: flex;
   justify-content: center;
+  gap: 10px;
 }
 
-.start-button, .stop-button, .time-input {
-  margin: 100px;
-  padding: 10px 30px;
+.time-components button {
+  padding: 5px 15px;
+}
+
+.time-components input {
+  margin-left: 10px;
+  padding: 5px;
 }
