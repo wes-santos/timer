@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .time {
+  color: white;
   font-family: 'Special Elite';
   font-size: 11em;
 }
@@ -46,4 +53,13 @@ main {
   text-align: center;
   padding: 6px;
   margin: 6px;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+}
+
+.youtube-player {
+  display: none;
 }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import tempo from './tempo.mp3';
+import YoutubeBackground from 'react-youtube-background';
+import track from './utils/musics.js';
 
 let intervalId;
 let timeoutId;
@@ -10,11 +12,22 @@ const App = () => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [audio] = useState(new Audio(tempo));
-  const [playing, setPlaying] = useState(false);
+  const [isTimeEnded, setIsTimeEnded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [trackIndex, setTrackIndex] = useState(0);
 
   useEffect(() => {
-    playing ? audio.play() : audio.pause();
-  }, [playing]);
+    isTimeEnded ? audio.play() : audio.pause();
+  }, [isTimeEnded]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      track[trackIndex].play();
+      track[trackIndex].onended = () => { changeSong() };
+    } else {
+      track[trackIndex].pause();
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     if (seconds === 0 && minutes > 0) {
@@ -23,15 +36,26 @@ const App = () => {
     }
   }, [seconds]);
 
+  const generateRandomIndex = () => (
+    Math.floor(Math.random() * 34)
+  );
+
+  const changeSong = () => {
+    setTrackIndex(generateRandomIndex());
+  }
+
   const handleStart = () => {
-    setPlaying(false);
+    setIsPlaying(true);
+    setIsTimeEnded(false);
+    changeSong();
     intervalId = setInterval(() => {
       setSeconds(prev => prev - 1);
     }, 1000);
 
     timeoutId = setTimeout(() => {
       clearInterval(intervalId);
-      setPlaying(true);
+      setIsPlaying(false);
+      setIsTimeEnded(true);
     }, minutes * 60 * 1000 + seconds * 1000);
   };
 
@@ -50,6 +74,7 @@ const App = () => {
   };
 
   const handleStop = () => {
+    setIsPlaying(false);
     clearInterval(intervalId);
     clearTimeout(timeoutId);
   };
@@ -59,55 +84,58 @@ const App = () => {
     setSeconds(originalSeconds);
     clearTimeout(timeoutId);
     clearInterval(intervalId);
+    setIsPlaying(false);
     handleStart();
   };
 
   return (
-    <main>
-      <div className="center">
-        <div className="time">
-          {`${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`}
-        </div>
-      </div>
-      <div className="center">
-          <input
-            type="number"
-            min="0"
-            value={minutes}
-            onChange={ handleMinutes }
-          />
-          <input
-            type="number"
-            min="0"
-            value={seconds}
-            onChange={ handleSeconds }
-          />
-        </div>
-        <div className="center-row">
-          <button
-            type="button"
-            onClick={ handleStart }
-            className="button"
-          >
-            Start
-          </button>
-          <button
-            type="button"
-            onClick={ handleStop }
-            className="button"
-          >
-            Stop
-          </button>
+    <YoutubeBackground videoId="D1ScW-VVuYA" className="background">
+      <main>
+          <div className="center">
+            <div className="time">
+              {`${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`}
+            </div>
+          </div>
+          <div className="center">
+              <input
+                type="number"
+                min="0"
+                value={minutes}
+                onChange={ handleMinutes }
+              />
+              <input
+                type="number"
+                min="0"
+                value={seconds}
+                onChange={ handleSeconds }
+              />
+            </div>
+            <div className="center-row">
+              <button
+                type="button"
+                onClick={ handleStart }
+                className="button"
+              >
+                Start
+              </button>
+              <button
+                type="button"
+                onClick={ handleStop }
+                className="button"
+              >
+                Stop
+              </button>
 
-          <button
-            type="button"
-            onClick={ handleRestart }
-            className="button"
-          >
-            Restart
-          </button>
-        </div>
-    </main>
+              <button
+                type="button"
+                onClick={ handleRestart }
+                className="button"
+              >
+                Restart
+              </button>
+            </div>
+      </main>
+    </YoutubeBackground>
   )
 }
 
