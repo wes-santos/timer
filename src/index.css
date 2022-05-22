@@ -1,38 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
-body {
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .time {
   font-family: 'Special Elite';
-  font-size: 8em;
-  margin-top: 50vh;
-  text-align: center;
+  font-size: 11em;
 }
 
-.time-components {
+.center {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /* height: 98vh; */
+  justify-content: center;
+}
+
+.center-row {
   align-items: center;
   display: flex;
   justify-content: center;
-  gap: 10px;
 }
 
-.time-components button {
-  padding: 5px 15px;
+.button {
+  border: 1px solid black;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 6px 20px;
 }
 
-.time-components input {
-  margin-left: 10px;
-  padding: 5px;
+.button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 98vh;
+  justify-content: center;
+}
+
+.center input {
+  text-align: center;
+  padding: 6px;
+  margin: 6px;
 }
