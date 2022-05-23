@@ -48,6 +48,10 @@ const App = () => {
     setIsPlaying(true);
     setIsTimeEnded(false);
     changeSong();
+    if (seconds === 0 && minutes > 0) {
+      setSeconds(59);
+      setMinutes(prev => prev - 1);
+    }
     intervalId = setInterval(() => {
       setSeconds(prev => prev - 1);
     }, 1000);
