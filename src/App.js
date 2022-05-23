@@ -23,18 +23,22 @@ const App = () => {
   useEffect(() => {
     if (isPlaying) {
       track[trackIndex].play();
-      track[trackIndex].onended = () => { changeSong() };
+      track[trackIndex].onended = () => { 
+        changeSong();
+      };
     } else {
       track[trackIndex].pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, trackIndex]);
 
   useEffect(() => {
-    if (seconds === 0 && minutes > 0) {
-      setMinutes(prev => prev - 1);
-      setSeconds(59);
+    if (isPlaying) {
+      if (seconds === 0 && minutes > 0) {
+        setMinutes(prev => prev - 1);
+        setSeconds(59);
+      }
     }
-  }, [seconds]);
+  }, [seconds, minutes]);
 
   const generateRandomIndex = () => (
     Math.floor(Math.random() * 34)
@@ -52,6 +56,7 @@ const App = () => {
       setSeconds(59);
       setMinutes(prev => prev - 1);
     }
+    
     intervalId = setInterval(() => {
       setSeconds(prev => prev - 1);
     }, 1000);
