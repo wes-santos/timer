@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import tempo from './tempo.mp3';
 import YoutubeBackground from 'react-youtube-background';
+import ReactPlayer from 'react-player';
 import track from './utils/musics.js';
 
 let intervalId;
@@ -15,13 +16,16 @@ const App = () => {
   const [isTimeEnded, setIsTimeEnded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackIndex, setTrackIndex] = useState(0);
+  const [source, setSource] = useState('');
+  const [videoId, setVideoId] = useState('');
+  const [videoTime, setVideoTime] = useState(0);
 
   useEffect(() => {
     isTimeEnded ? audio.play() : audio.pause();
   }, [isTimeEnded]);
 
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && source === '') {
       track[trackIndex].play();
       track[trackIndex].onended = () => { 
         changeSong();
@@ -97,13 +101,40 @@ const App = () => {
     handleStart();
   };
 
+  const handleSource = ({ target: { value } }) => {
+    setSource(value);
+  };
+
+  const getVideoId = () => {
+    const sourceArr = source.split('');
+    const result = source.substring(sourceArr.indexOf('?') + 3);
+    return setVideoId(result);
+  };
+
+  useEffect(() => { getVideoId() }, [source]);
+
   return (
-    <YoutubeBackground videoId="D1ScW-VVuYA" className="background">
+    <YoutubeBackground
+      videoId={ isPlaying && videoId ? videoId : 'gnZImHvA0ME' }
+      className="background"
+      start-at={ videoTime }
+    >
       <main>
           <div className="center">
             <div className="time">
               {`${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`}
             </div>
+          </div>
+          <div>
+            <label htmlFor="sourceInput">
+              <input
+                type="text"
+                id="souceInput"
+                placeholder="put your playlist here"
+                value={ source }
+                onChange={ handleSource }
+              />
+            </label>
           </div>
           <div className="center">
               <input
@@ -142,6 +173,16 @@ const App = () => {
               >
                 Restart
               </button>
+            </div>
+            <div className="hidden">
+              <ReactPlayer
+                url={ source }
+                playing={ isPlaying }
+                onProgress={ (progress) => {
+                  const time = progress.playedSeconds;
+                  setVideoTime(time);
+                } }
+              />
             </div>
       </main>
     </YoutubeBackground>
