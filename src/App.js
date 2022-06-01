@@ -27,7 +27,7 @@ const App = () => {
   useEffect(() => {
     if (isPlaying && source === '') {
       track[trackIndex].play();
-      track[trackIndex].onended = () => { 
+      track[trackIndex].onended = () => {
         changeSong();
       };
     } else {
@@ -60,7 +60,7 @@ const App = () => {
       setSeconds(59);
       setMinutes(prev => prev - 1);
     }
-    
+
     intervalId = setInterval(() => {
       setSeconds(prev => prev - 1);
     }, 1000);
@@ -72,7 +72,7 @@ const App = () => {
     }, minutes * 60 * 1000 + seconds * 1000);
   };
 
-  const handleMinutes = ({target: { value }}) => {
+  const handleMinutes = ({ target: { value } }) => {
     setOriginalMinutes(Number(value));
     setMinutes(Number(value));
   };
@@ -115,52 +115,55 @@ const App = () => {
 
   return (
     <YoutubeBackground
-      videoId={ isPlaying && videoId ? videoId : 'gnZImHvA0ME' }
+      videoId={isPlaying && videoId ? videoId : 'Db-uvuvEEV0'}
       className="background"
-      start-at={ videoTime }
+      start-at={videoTime}
     >
       <main>
-          <div className="center">
-            <div className="time">
-              {`${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`}
-            </div>
-          </div>
+        <div className="wrapper">
           <div>
-            <label htmlFor="sourceInput">
-              <input
-                type="text"
-                id="souceInput"
-                placeholder="put your playlist here"
-                value={ source }
-                onChange={ handleSource }
-              />
-            </label>
-          </div>
-          <div className="center">
+            <div className="center">
+              <div className="time">
+                {`${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`}
+              </div>
+            </div>
+            <div className="center">
+              <p className="label-text">Que tal escolher sua própria playlist?</p>
+              <label htmlFor="sourceInput">
+                <input
+                  type="text"
+                  id="souceInput"
+                  placeholder="Coloque o link aqui"
+                  value={source}
+                  onChange={handleSource}
+                />
+              </label>
+            </div>
+            <div className="center">
               <input
                 type="number"
                 min="0"
                 value={minutes}
-                onChange={ handleMinutes }
+                onChange={handleMinutes}
               />
               <input
                 type="number"
                 min="0"
                 value={seconds}
-                onChange={ handleSeconds }
+                onChange={handleSeconds}
               />
             </div>
             <div className="center-row">
               <button
                 type="button"
-                onClick={ handleStart }
+                onClick={handleStart}
                 className="button"
               >
                 Start
               </button>
               <button
                 type="button"
-                onClick={ handleStop }
+                onClick={handleStop}
                 className="button"
               >
                 Stop
@@ -168,7 +171,7 @@ const App = () => {
 
               <button
                 type="button"
-                onClick={ handleRestart }
+                onClick={handleRestart}
                 className="button"
               >
                 Restart
@@ -176,14 +179,16 @@ const App = () => {
             </div>
             <div className="hidden">
               <ReactPlayer
-                url={ source }
-                playing={ isPlaying }
-                onProgress={ (progress) => {
+                url={source}
+                playing={isPlaying}
+                onProgress={(progress) => {
                   const time = progress.playedSeconds;
                   setVideoTime(time);
-                } }
+                }}
               />
             </div>
+          </div>
+        </div>
       </main>
     </YoutubeBackground>
   )
