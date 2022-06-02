@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import tempo from './tempo.mp3';
 import YoutubeBackground from 'react-youtube-background';
 import ReactPlayer from 'react-player';
-import track from './utils/musics.js';
 
 let intervalId;
 let timeoutId;
@@ -15,25 +14,12 @@ const App = () => {
   const [audio] = useState(new Audio(tempo));
   const [isTimeEnded, setIsTimeEnded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [trackIndex, setTrackIndex] = useState(0);
   const [source, setSource] = useState('');
   const [videoId, setVideoId] = useState('');
-  const [videoTime, setVideoTime] = useState(0);
 
   useEffect(() => {
     isTimeEnded ? audio.play() : audio.pause();
   }, [isTimeEnded]);
-
-  useEffect(() => {
-    if (isPlaying && source === '') {
-      track[trackIndex].play();
-      track[trackIndex].onended = () => {
-        changeSong();
-      };
-    } else {
-      track[trackIndex].pause();
-    }
-  }, [isPlaying, trackIndex]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -48,14 +34,9 @@ const App = () => {
     Math.floor(Math.random() * 34)
   );
 
-  const changeSong = () => {
-    setTrackIndex(generateRandomIndex());
-  }
-
   const handleStart = () => {
     setIsPlaying(true);
     setIsTimeEnded(false);
-    changeSong();
     if (seconds === 0 && minutes > 0) {
       setSeconds(59);
       setMinutes(prev => prev - 1);
@@ -115,9 +96,8 @@ const App = () => {
 
   return (
     <YoutubeBackground
-      videoId={isPlaying && videoId ? videoId : 'Db-uvuvEEV0'}
+      videoId={isPlaying && videoId ? videoId : 'anypqg9428Y'}
       className="background"
-      start-at={videoTime}
     >
       <main>
         <div className="wrapper">
@@ -139,19 +119,20 @@ const App = () => {
                 />
               </label>
             </div>
-            <div className="center">
-              <input
-                type="number"
-                min="0"
-                value={minutes}
-                onChange={handleMinutes}
-              />
-              <input
-                type="number"
-                min="0"
-                value={seconds}
-                onChange={handleSeconds}
-              />
+            <div className="center input-time-wrapper">
+            <p>Defina o tempo:</p>
+            <input
+              type="number"
+              min="0"
+              value={minutes}
+              onChange={handleMinutes}
+            />
+            <input
+              type="number"
+              min="0"
+              value={seconds}
+              onChange={handleSeconds}
+            />
             </div>
             <div className="center-row">
               <button
@@ -179,12 +160,10 @@ const App = () => {
             </div>
             <div className="hidden">
               <ReactPlayer
-                url={source}
+                url={
+                  source.length ? source : 'https://www.youtube.com/watch?v=anypqg9428Y'
+                }
                 playing={isPlaying}
-                onProgress={(progress) => {
-                  const time = progress.playedSeconds;
-                  setVideoTime(time);
-                }}
               />
             </div>
           </div>
