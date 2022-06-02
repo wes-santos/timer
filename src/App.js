@@ -30,11 +30,13 @@ const App = () => {
     }
   }, [seconds, minutes]);
 
-  const generateRandomIndex = () => (
-    Math.floor(Math.random() * 34)
-  );
-
   const handleStart = () => {
+    if (!source.includes('youtube') && source !== '') {
+      return global.alert('A playlist precisa ser do YouTube!')
+    }
+    if(minutes === 0 && seconds === 0) {
+      return global.alert('Você precisa definir um tempo!');
+    }
     setIsPlaying(true);
     setIsTimeEnded(false);
     if (seconds === 0 && minutes > 0) {
