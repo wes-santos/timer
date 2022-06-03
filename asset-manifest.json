@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/timer/static/css/main.aa569cfa.css",
-    "main.js": "/timer/static/js/main.657e497a.js",
+    "main.js": "/timer/static/js/main.e51b4133.js",
     "static/js/787.8e9e615b.chunk.js": "/timer/static/js/787.8e9e615b.chunk.js",
     "static/media/tempo.mp3": "/timer/static/media/tempo.88e5bd3902cdb44ae059.mp3",
     "index.html": "/timer/index.html",
     "main.aa569cfa.css.map": "/timer/static/css/main.aa569cfa.css.map",
-    "main.657e497a.js.map": "/timer/static/js/main.657e497a.js.map",
+    "main.e51b4133.js.map": "/timer/static/js/main.e51b4133.js.map",
     "787.8e9e615b.chunk.js.map": "/timer/static/js/787.8e9e615b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.aa569cfa.css",
-    "static/js/main.657e497a.js"
+    "static/js/main.e51b4133.js"
   ]
 }
