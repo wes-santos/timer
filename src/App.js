@@ -23,7 +23,7 @@ const App = () => {
 
   useEffect(() => {
     if (isPlaying) {
-      if (seconds === 0 && minutes > 0) {
+      if (seconds === -1 && minutes > 0) {
         setMinutes(prev => prev - 1);
         setSeconds(59);
       }
