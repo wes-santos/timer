@@ -7,6 +7,10 @@
   font-family: poppins;
 }
 
+.source-input {
+  width: 98%;
+}
+
 @media only screen and (min-width: 806px) and (min-height: 545px){
   .wrapper {
     background-color: black;
@@ -115,21 +119,21 @@
     justify-content: center;
     border-radius: 20px;
     flex-direction: column;
-    padding: 40px 20px;
+    padding: 80px 20px;
   }
 
   .center input {
     border-radius: 5px;
     border: none;
-    margin: 3px;
+    margin: 12px 3px;
     padding: 1.5px;
     text-align: center;
   }
 
   .center-row {
-    /* align-items: center; */
+    align-items: center;
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
   }
 
   .input-time-wrapper input {
@@ -163,7 +167,7 @@
     border-radius: 12px;
     justify-content: center;
     padding: 0 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .time-minutes, .time-seconds {
@@ -186,6 +190,14 @@
   .input-time-wrapper {
     color: white;
     font-size: 0.8em;
+  }
+
+  .label-text {
+    font-weight: 700;
+  }
+
+  .source-input::placeholder {
+    font-size: 11px;
   }
 }
 
@@ -206,21 +218,21 @@
     justify-content: center;
     border-radius: 20px;
     flex-direction: column;
-    padding: 140px 20px;
+    padding: 110px 20px;
   }
 
   .center input {
     border-radius: 5px;
     border: none;
-    margin: 3px;
+    margin: 12px 3px;
     padding: 1.5px;
     text-align: center;
   }
 
   .center-row {
-    /* align-items: center; */
+    align-items: center;
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
   }
 
   .input-time-wrapper input {
@@ -233,6 +245,7 @@
 
   .label-text {
     color: white;
+    font-weight: 700;
     font-size: 1em;
   }
 
@@ -243,7 +256,7 @@
     font-weight: bold;
     margin-top: 5px;
     margin-right: 5px;
-    padding: 3px 10px;
+    padding: 5px 16px;
   }
   
   .button:hover {
@@ -258,7 +271,7 @@
     border-radius: 12px;
     justify-content: center;
     padding: 0 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .time-minutes, .time-seconds {
@@ -276,6 +289,10 @@
 
   .time-separator {
     font-size: 4.5em;
+  }
+
+  .source-input {
+    padding: 4px!important;
   }
 }
 

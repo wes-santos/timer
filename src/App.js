@@ -123,15 +123,13 @@ const App = () => {
               </div>
             <div className="center">
               <p className="label-text">Que tal escolher sua própria playlist?</p>
-              <label htmlFor="sourceInput">
-                <input
-                  type="text"
-                  id="souceInput"
-                  placeholder="Coloque o link aqui"
-                  value={source}
-                  onChange={handleSource}
-                />
-              </label>
+              <input
+                type="text"
+                placeholder="Coloque o link do YouTube aqui"
+                className="source-input"
+                value={source}
+                onChange={handleSource}
+              />
             </div>
             <div className="center-row">
               <button
