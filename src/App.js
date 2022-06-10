@@ -104,11 +104,23 @@ const App = () => {
       <main>
         <div className="wrapper">
           <div>
-            <div className="center">
               <div className="time">
-                {`${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`}
+                <input 
+                  type="number"
+                  min="0"
+                  value={ minutes.toString().padStart(2, 0) }
+                  onChange={ handleMinutes }
+                  className="time-minutes"
+                />
+                <span className="time-separator">:</span>
+                <input
+                  type="number"
+                  min="0"
+                  value={ seconds.toString().padStart(2, 0) }
+                  onChange={ handleSeconds }
+                  className="time-seconds"
+                />
               </div>
-            </div>
             <div className="center">
               <p className="label-text">Que tal escolher sua própria playlist?</p>
               <label htmlFor="sourceInput">
@@ -120,21 +132,6 @@ const App = () => {
                   onChange={handleSource}
                 />
               </label>
-            </div>
-            <div className="center input-time-wrapper">
-            <p>Defina o tempo:</p>
-            <input
-              type="number"
-              min="0"
-              value={minutes}
-              onChange={handleMinutes}
-            />
-            <input
-              type="number"
-              min="0"
-              value={seconds}
-              onChange={handleSeconds}
-            />
             </div>
             <div className="center-row">
               <button
