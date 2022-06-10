@@ -11,6 +11,11 @@
   width: 98%;
 }
 
+.time input:focus {
+  box-shadow: 0 0 0 0!important;
+  outline: 0!important;
+}
+
 @media only screen and (min-width: 806px) and (min-height: 545px){
   .wrapper {
     background-color: black;
