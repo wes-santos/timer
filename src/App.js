@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import tempo from './tempo.mp3';
 import YoutubeBackground from 'react-youtube-background';
 import ReactPlayer from 'react-player';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay, faPause, faRepeat } from '@fortawesome/free-solid-svg-icons'
 
 let intervalId;
 let timeoutId;
@@ -137,6 +139,7 @@ const App = () => {
                 onClick={handleStart}
                 className="button"
               >
+                <FontAwesomeIcon icon={faPlay} />
                 Start
               </button>
               <button
@@ -144,6 +147,7 @@ const App = () => {
                 onClick={handleStop}
                 className="button"
               >
+                <FontAwesomeIcon icon={faPause} />
                 Stop
               </button>
 
@@ -152,6 +156,7 @@ const App = () => {
                 onClick={handleRestart}
                 className="button"
               >
+                <FontAwesomeIcon icon={faRepeat} />
                 Restart
               </button>
             </div>
