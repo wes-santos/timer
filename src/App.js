@@ -36,7 +36,7 @@ const App = () => {
     if (!source.includes('youtube') && source !== '') {
       return global.alert('A playlist precisa ser do YouTube!')
     }
-    if(minutes === 0 && seconds === 0) {
+    if (minutes === 0 && seconds === 0) {
       return global.alert('Você precisa definir um tempo!');
     }
     setIsPlaying(true);
@@ -90,13 +90,23 @@ const App = () => {
     setSource(value);
   };
 
+  // Credits:
+  // https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url
+  const youtubeParser = (url) => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[7].length == 11) ? match[7] : false;
+  }
+
   const getVideoId = () => {
-    const sourceArr = source.split('');
-    const result = source.substring(sourceArr.indexOf('?') + 3);
+    const result = youtubeParser(source);
+    // console.log(result);
+
     return setVideoId(result);
   };
 
-  useEffect(() => { getVideoId() }, [source]);
+  useEffect(() => { getVideoId(); }, [source]);
 
   return (
     <YoutubeBackground
@@ -106,23 +116,23 @@ const App = () => {
       <main>
         <div className="wrapper">
           <div>
-              <div className="time">
-                <input 
-                  type="number"
-                  min="0"
-                  value={ minutes.toString().padStart(2, 0) }
-                  onChange={ handleMinutes }
-                  className="time-minutes"
-                />
-                <span className="time-separator">:</span>
-                <input
-                  type="number"
-                  min="0"
-                  value={ seconds.toString().padStart(2, 0) }
-                  onChange={ handleSeconds }
-                  className="time-seconds"
-                />
-              </div>
+            <div className="time">
+              <input
+                type="number"
+                min="0"
+                value={minutes.toString().padStart(2, 0)}
+                onChange={handleMinutes}
+                className="time-minutes"
+              />
+              <span className="time-separator">:</span>
+              <input
+                type="number"
+                min="0"
+                value={seconds.toString().padStart(2, 0)}
+                onChange={handleSeconds}
+                className="time-seconds"
+              />
+            </div>
             <div className="center">
               <p className="label-text">Que tal escolher sua própria playlist?</p>
               <input
@@ -161,12 +171,19 @@ const App = () => {
               </button>
             </div>
             <div className="hidden">
-              <ReactPlayer
-                url={
-                  source.length ? source : 'https://www.youtube.com/watch?v=anypqg9428Y'
-                }
-                playing={isPlaying}
-              />
+              {
+                videoId ? (
+                  <ReactPlayer
+                    url={`https://www.youtube.com/watch?v=${videoId}`}
+                    playing={isPlaying}
+                  />
+                ) : (
+                  <ReactPlayer
+                    url={'https://www.youtube.com/watch?v=anypqg9428Y'}
+                    playing={isPlaying}
+                  />
+                )
+              }
             </div>
           </div>
         </div>
