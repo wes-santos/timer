@@ -1,15 +1,36 @@
-import React, { useRef, useState } from 'react';
-import YouTube, { type YouTubeEvent, type YouTubePlayer } from 'react-youtube';
-import styles from './YoutubeVideoBackground.module.css';
-
+import React, { useEffect, useRef, useState } from "react";
+import YouTube, { type YouTubeEvent, type YouTubePlayer } from "react-youtube";
+import styles from "./YoutubeVideoBackground.module.css";
 
 interface YoutubeVideoBackgroundProps {
     videoId: string;
+    startVideo: boolean;
+    pauseVideo: boolean;
 }
 
-const YoutubeVideoBackground: React.FC<YoutubeVideoBackgroundProps> = ({ videoId }) => {
+const YoutubeVideoBackground: React.FC<YoutubeVideoBackgroundProps> = ({
+    videoId,
+    startVideo,
+    pauseVideo,
+}) => {
     const playerRef = useRef<YouTubePlayer | null>(null);
     const [isMuted, setIsMuted] = useState<boolean>(true);
+
+    useEffect(() => {
+        playerRef.current?.setVolume(2.5);
+    }, [isMuted]);
+
+    useEffect(() => {
+        if (startVideo) {
+            handlePlay();
+            playerRef.current?.unMute();
+            setIsMuted(false);
+        }
+
+        if (pauseVideo) {
+            handlePause();
+        }
+    }, [startVideo, pauseVideo]);
 
     const onReady = (event: YouTubeEvent) => {
         playerRef.current = event.target;
@@ -27,14 +48,14 @@ const YoutubeVideoBackground: React.FC<YoutubeVideoBackgroundProps> = ({ videoId
     const handleVolumeUp = () => {
         const currentVolume = playerRef.current?.getVolume();
         if (currentVolume !== undefined) {
-            playerRef.current?.setVolume(currentVolume + 5);
+            playerRef.current?.setVolume(currentVolume + 2.5);
         }
     };
 
     const handleVolumeDown = () => {
         const currentVolume = playerRef.current?.getVolume();
         if (currentVolume !== undefined) {
-            playerRef.current?.setVolume(currentVolume - 5);
+            playerRef.current?.setVolume(currentVolume - 2.5);
         }
     };
 
@@ -47,7 +68,7 @@ const YoutubeVideoBackground: React.FC<YoutubeVideoBackgroundProps> = ({ videoId
 
         playerRef.current?.mute();
         setIsMuted(true);
-    }
+    };
 
     const opts = {
         playerVars: {
@@ -77,6 +98,5 @@ const YoutubeVideoBackground: React.FC<YoutubeVideoBackgroundProps> = ({ videoId
         </>
     );
 };
-
 
 export default YoutubeVideoBackground;
